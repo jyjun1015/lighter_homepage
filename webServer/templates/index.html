@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>동-방</title>
+    <title>Flask</title>
     <meta charset="UTF-8">
     <meta name="description" content="LERAMIZ Landing Page Template">
     <meta name="keywords" content="LERAMIZ, unica, creative, html">
@@ -59,56 +59,54 @@
     <!-- Header section end -->
 
     <!-- Hero section -->
-    <section class="hero-section set-bg" data-setbg="img/bg3.jpg">
+    <section class="hero-section">
         <div class="container hero-text text-black">
-            <h2>Flask example for monitering!!</h2>
+            <h2>Flask example for monitering & Actuating!!</h2>
             <p>
-                Simple example for monitering sensor data & video streaming on WEB environment <br>
+                Simple example for monitering sensor data & actuate LED on web environment <br>
+                This system consists of three elements : 1) webserver 2) Database(MySQL) 3) Raspberry-Pi<br>
+                (Both webserver & database is located on AWS)<br>
                 There are two main Function in this system <br>
-                1. Can get sensor information from raspberry pi<br>
-                2. Can get video information from raspberry pi & actuate LED from web browser<br>
-                <br><br>
-                To acheive above<br>
-                1. Using mysql database to store value from temperature sensor <br>
-                2. Using ffmpeg & jsmpeg player to view video from raspberry pi
-
+                1 Can get sensor information from raspberry pi<br>
+                2 Actuate LED using Buttons<br>
             </p>
         </div>
     </section>
 
     <!-- Services section -->
-    <section class="services-section spad set-bg" data-setbg="{{url_for('static', filename = 'img/bg-monitoring.jpg')}}">
-        <h2 class="text-center" style="padding-bottom:100px"> Temperature Sensor(DHT11) Monitering Value!</h2>
+    <section class="services-section spad" style="background-color:aliceblue">
+        <h2 class="text-center" style="padding-bottom:60px"> Temperature Sensor(DHT11) Monitering Value!</h2>
         <div class="container">
             <div class="row section-title  text-secondary">
-                date : {{results[0][3]}}
-                
+                <p id="id_date"></p>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <h4>Current Temperature</h4>
-
                     <div class="progress" style="height:60px;">
-                        <div class="progress-bar" role="progressbar" style="width: {{results[0][1]}}%;"
-                            aria-valuenow="50" aria-valuemin="50" aria-valuemax="50">
-                            <p class="text-white" style="padding-top:15px;">{{results[0][1]}}</p>
+                        <div class="progress-bar" id="id_temp_bar" role="progressbar" aria-valuenow="50"
+                            aria-valuemin="50" aria-valuemax="50">
+                            <p class="text-white" id="id_temp_message" style="padding-top:15px;"></p>
                         </div>
                     </div>
-
                     <br><br><br>
                     <h4>Current Humidity</h4>
                     <div class="progress" style="height:60px;">
-                        <div class="progress-bar" role="progressbar" style="width: {{results[0][2]}}%;"
-                            aria-valuenow="50" aria-valuemin="50" aria-valuemax="50">
-                            <p class="text-white" style="padding-top:15px;">{{results[0][2]}}</p>
+                        <div class="progress-bar" role="progressbar" id="id_humid_bar" aria-valuenow="50"
+                            aria-valuemin="50" aria-valuemax="50">
+                            <p class="text-white" id="id_humid_message" style="padding-top:15px;"></p>
                         </div>
                     </div>
+
+                    <button id="LED" type="button" class="btn btn-primary active text-center"
+                        style="margin-top:30px;width:200px;">LED ON</button>
+
 
 
                 </div>
                 <div class="col-lg-5 offset-lg-1 pl-lg-0">
                     <div class="section-title text-black">
-                        <p>Table for Recent 10 values</p>
+                        <p>Table for Recent 5 values</p>
                     </div>
                     <table class="table table-hover">
                         <thead>
@@ -116,14 +114,16 @@
                                 <th>Date time</th>
                                 <th>Temperature</th>
                                 <th>Humidity</th>
+                                <th>Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for row in results %}
+                            {% for i in range(1, 6) %}
                             <tr>
-                                <td>{{row[3]}}</td>
-                                <td>{{row[1]}}</td>
-                                <td>{{row[2]}}</td>
+                                <td id="id_table_{{i}}_date"></td>
+                                <td id="id_table_{{i}}_temp"></td>
+                                <td id="id_table_{{i}}_humid"></td>
+                                <td id="id_table_{{i}}_name"></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -134,63 +134,19 @@
     </section>
     <!-- Services section end -->
 
-    <!-- Feature section start  -->
-    <section class="feature-section spad set-bg" data-setbg="img/review-bg2.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    Rendering Video Streaming Data and i just somthign just like you
-                </div>
-                <div class="col-lg-5 offset-lg-1 pl-lg-0">
-                    <div class="section-title text-black">
-                        <h3></h3>
-                        <p>동국대 학생의 주거문제 해결을 위한 새로운 기준을 제시합니다.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-item">
-                            <i class="fa fa-comments"></i>
-                            <div class="service-text">
-                                <h5>자취특화 커뮤니티</h5>
-                                <p>동방은 자취생이 자유롭게 의견을 교환 할 수 있는 공간을 제공합니다.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa fa-home"></i>
-                            <div class="feature-text">
-                                <h5>학교 제공 자취공간 검색</h5>
-                                <p>동국대가 제공하는 주거환경을 검색할 수 있습니다.</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa fa-briefcase"></i>
-                            <div class="feature-text">
-                                <h5>더 나아가</h5>
-                                <p>자취환경 개선을 위하여 노력할것입니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Feature Section End -->
-
-
-
     <!-- Footer section -->
     <footer class="footer-section" style="background-color:black">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 footer-widget">
-                    <img src="/img/logo.png" alt="">
-                    <p>원피스 팀은 동국대학교 창업캡스톤디자인 팀으로 동국대학교 링크사업단과 함께합니다.</p>
+                    
+                    <p>내가 다만듬<br>밑에꺼 사실 클릭해도 아무것도연결안됨</p>
                     <div class="social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
                         <a href="#"><i class="fa fa-instagram"></i></a>
                         <a href="#"><i class="fa fa-pinterest"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
+
                     </div>
                 </div>
 
@@ -198,10 +154,10 @@
                 <div class="col-lg-4 col-md-6 footer-widget">
                     <div class="contact-widget">
                         <h5 class="fw-title">CONTACT US</h5>
-                        <p><i class="fa fa-map-marker"></i>04620 중구 필동로 1길 30 동국대학교 신공학관 9층</p>
-                        <p><i class="fa fa-phone"></i>'전화 : 02-2290-1723~30팩스 : 02-2290-1731'</p>
-                        <p><i class="fa fa-envelope"></i>jeff8014@colorlib.com</p>
-                        <p><i class="fa fa-clock-o"></i>월 - 토, 08 AM - 06 PM</p>
+                        <p><i class="fa fa-map-marker"></i>04620 중구 필동로 1길 30 동국대학교</p>
+                        <p><i class="fa fa-phone"></i>전화 : 010-5678-3431</p>
+                        <p><i class="fa fa-envelope"></i>jeff8014@gmail.com</p>
+                        <p><i class="fa fa-clock-o"></i>월 - 금, 12AM ~ 12PM</p>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6 footer-widget">
@@ -246,5 +202,45 @@
 <script src="{{url_for('static', filename='js/magnific-popup.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/main.js')}}"></script>
 <script src="{{url_for('static', filename='js/guage.js')}}"></script>
+<script>
+    let led_status = 0;
+    $(function () {
+        $("button").click(function () {
+            $.get('/led', {input : led_status}, function (data, success) {
+
+                if (led_status == 0) {
+                    led_status = 1;
+                    $("#LED").fadeTo('slow', 1);
+                    $("#LED").text("LED ON");
+                }
+                else {
+                    led_status = 0;
+                    $("#LED").fadeTo('slow', 0.15);
+                    $("#LED").text("LED OFF");
+                }
+            });
+        });
+    })
+
+    $(document).ready(function () {
+        $.getJSON('/getData', function (data) {
+            for (i = 0; i < 5; i++) {
+                console.log(data[i]);
+                const t = toString(i + 1);
+                $('#id_table_'.concat(i + 1, '_date')).text(data[i][3]);
+                $('#id_table_'.concat(i + 1, '_temp')).text(data[i][1]);
+                $('#id_table_'.concat(i + 1, '_humid')).text(data[i][2]);
+                $('#id_table_'.concat(i + 1, '_name')).text(data[i][4]);
+            }
+            $('#id_temp_bar').width(data[0][1] + '%')
+            $('#id_temp_message').text(data[0][1] + '˚C');
+            $('#id_humid_bar').width(data[0][2] + '%')
+            $('#id_humid_message').text(data[0][2] + '%');
+        });
+        $("#LED").fadeTo('slow', 0.15);
+        $("#LED").text("LED OFF");
+
+    })
+</script>
 
 </html>
