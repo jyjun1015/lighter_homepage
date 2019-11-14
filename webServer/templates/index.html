@@ -134,12 +134,48 @@
     </section>
     <!-- Services section end -->
 
+    <!-- Services section -->
+    <section class="services-section spad" style="background-color:aliceblue">
+        <h2 class="text-center" style="padding-bottom:60px"> Get Data from OPEN API!!</h2>
+        <div class="container">
+            <div class="row section-title  text-secondary">
+                <p id="id_date"></p>
+            </div>
+            <div class="row">
+                    <div class="section-title text-black">
+                        <p>Table for 5 street</p>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date time</th>
+                                <th>stationName</th>
+                                <th>o3Value</th>
+                                <th>pm25Value24</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in range(1, 6) %}
+                            <tr>
+                                <td id="id_table_aircondition_{{i}}_date"></td>
+                                <td id="id_table_aircondition_{{i}}_station"></td>
+                                <td id="id_table_aircondition_{{i}}_o3value"></td>
+                                <td id="id_table_aircondition_{{i}}_pm25"></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </section>
+    <!-- Services section end -->
+
     <!-- Footer section -->
     <footer class="footer-section" style="background-color:black">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 footer-widget">
-                    
+
                     <p>내가 다만듬<br>밑에꺼 사실 클릭해도 아무것도연결안됨</p>
                     <div class="social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -206,7 +242,7 @@
     let led_status = 0;
     $(function () {
         $("button").click(function () {
-            $.get('/led', {input : led_status}, function (data, success) {
+            $.get('/led', { input: led_status }, function (data, success) {
 
                 if (led_status == 0) {
                     led_status = 1;
@@ -238,7 +274,20 @@
         });
         $("#LED").fadeTo('slow', 0.15);
         $("#LED").text("LED OFF");
-
+        
+        $.getJSON('/getAirCondition', function (data) {
+            console.log(data.list[0].coValue)
+            
+            for (i = 0; i < 5; i++) {
+                
+                const t = toString(i + 1);
+                $('#id_table_aircondition_'.concat(i + 1, '_date')).text(data.list[i].dataTime);
+                $('#id_table_aircondition_'.concat(i + 1, '_station')).text(data.list[i].stationName);
+                $('#id_table_aircondition_'.concat(i + 1, '_o3value')).text(data.list[i].o3Value);
+                $('#id_table_aircondition_'.concat(i + 1, '_pm25')).text(data.list[i].pm25Value24);
+            }
+            
+        });
     })
 </script>
 
