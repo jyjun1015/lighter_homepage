@@ -10,6 +10,8 @@ app.config['MYSQL_DATABASE_USER'] = 'choi'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'chOicha0'
 app.config['MYSQL_DATABASE_DB'] = 'iotProject'
 app.config['MYSQL_DATABASE_HOST'] = '3.133.139.175'
+api_service_key = 'rTgkWoe%2FDfnKVsvwwiN8fT%2B6Sw7aiOMWaWH7YGczxqvnTHINnvTMv6PEHqA72S0ra3lAmKDtBhBcGxFisdD1ig%3D%3D'
+
 mysql.init_app(app)
 def sql_select():
     conn = mysql.connect()    
@@ -27,6 +29,11 @@ def led():
     else :
         requests.get('http://127.0.0.1:5000/led/OFF')
     return 'SUCCESS'
+
+@app.route('/getAirCondition', methods=['GET'])
+def getAirCondition():
+    return requests.get('http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=%EC%84%9C%EC%9A%B8&pageNo=1&numOfRows=10&ServiceKey=' + api_service_key + '&ver=1.3&_returnType=json').json()
+    
 
 @app.route('/getData', methods=['GET'])
 def getData():
