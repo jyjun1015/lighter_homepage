@@ -81,7 +81,7 @@
                 <p id="id_date"></p>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <h4>Current Temperature</h4>
                     <div class="progress" style="height:60px;">
                         <div class="progress-bar" id="id_temp_bar" role="progressbar" aria-valuenow="50"
@@ -104,7 +104,7 @@
 
 
                 </div>
-                <div class="col-lg-5 offset-lg-1 pl-lg-0">
+                <div class="col-lg-6 offset-lg-1 pl-lg-0 text-center">
                     <div class="section-title text-black">
                         <p>Table for Recent 5 values</p>
                     </div>
@@ -225,11 +225,10 @@
     $(document).ready(function () {
         $.getJSON('/getData', function (data) {
             for (i = 0; i < 5; i++) {
-                console.log(data[i]);
                 const t = toString(i + 1);
                 $('#id_table_'.concat(i + 1, '_date')).text(data[i][3]);
-                $('#id_table_'.concat(i + 1, '_temp')).text(data[i][1]);
-                $('#id_table_'.concat(i + 1, '_humid')).text(data[i][2]);
+                $('#id_table_'.concat(i + 1, '_temp')).text(data[i][1] + '˚C');
+                $('#id_table_'.concat(i + 1, '_humid')).text(data[i][2] + '%');
                 $('#id_table_'.concat(i + 1, '_name')).text(data[i][4]);
             }
             $('#id_temp_bar').width(data[0][1] + '%')
