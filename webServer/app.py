@@ -30,7 +30,7 @@ def led():
         requests.get('http://210.94.181.91:8080/led/OFF')
     return 'SUCCESS'
 
-@app.route('/test', methods=['GET', 'POST'])
+@app.route('/NodeMCU', methods=['GET', 'POST'])
 def test():
     print ("NODEMCU CONNECTED!!!!!!!")
     value = request.data.decode('utf-8')
