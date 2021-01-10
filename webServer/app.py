@@ -7,20 +7,36 @@ app = Flask(__name__)
 mysql = MySQL()
 #MYSQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'pildong'
-app.config['MYSQL_DATABASE_DB'] = 'example'
-app.config['MYSQL_DATABASE_HOST'] = '127.0.0.1'
-
-# api_service_key = 'rTgkWoe%2FDfnKVsvwwiN8fT%2B6Sw7aiOMWaWH7YGczxqvnTHINnvTMv6PEHqA72S0ra3lAmKDtBhBcGxFisdD1ig%3D%3D'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+app.config['MYSQL_DATABASE_DB'] = 'lighter_db'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
 mysql.init_app(app)
-def sql_select():
+
+def sql_select_sticker():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('select * from iotProject.tbl_sensor_temp order by sensor_id DESC limit 5;')
+    cursor.execute('select * from STICKER_DEVICE limit 5;')
     data = cursor.fetchall()
     conn.close()
     return data
+
+def sql_select_gas():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('select * from GAS_DEVICE limit 5;')
+    data = cursor.fetchall()
+    conn.close()
+    return data
+
+def sql_select_device():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('select * from SPEC_DEVICE limit 5;')
+    data = cursor.fetchall()
+    conn.close()
+    return data
+
 
 # @app.route('/led', methods=['GET'])
 # def led():
@@ -43,9 +59,19 @@ def sql_select():
 #     return requests.get('http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=%EC%84%9C%EC%9A%B8&pageNo=1&numOfRows=10&ServiceKey=' + api_service_key + '&ver=1.3&_returnType=json').json()
 
 
-@app.route('/getData', methods=['GET'])
-def getData():
-    data = sql_select()
+@app.route('/getSticker', methods=['GET'])
+def getSticker():
+    data = sql_select_sticker()
+    return jsonify(data)
+
+@app.route('/getGas', methods=['GET'])
+def getGas():
+    data = sql_select_gas()
+    return jsonify(data)
+
+@app.route('/getDevice', methods=['GET'])
+def getDevice():
+    data = sql_select_device()
     return jsonify(data)
 
 @app.route('/')

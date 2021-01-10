@@ -2,24 +2,20 @@
 <html lang="en">
 
 <head>
-    <title>Flask</title>
+    <title>Lighter-Monitoring</title>
     <meta charset="UTF-8">
     <meta name="description" content="LERAMIZ Landing Page Template">
     <meta name="keywords" content="LERAMIZ, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="shortcut icon" />
-
     <!-- Stylesheets -->
-
     <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
-
 </head>
-
 
 <body data-spy="scroll" data-offset="50">
     <!-- Page Preloder -->
@@ -27,18 +23,18 @@
         <div class="loader"></div>
     </div>
     <!-- Header section -->
-    <header class="header-section" style="background-color:black;">
+    <!-- <header class="header-section" style="background-color:white;">
         <div class="header-top">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 header-top-left">
                         <div class="top-info">
                             <i class="fa fa-phone"></i>
-                            010 5678 3431
+                            010 4741 7751
                         </div>
                         <div class="top-info">
                             <i class="fa fa-envelope"></i>
-                            jeff8014@gmail.com
+                            jyjun1015@naver.com
                         </div>
                     </div>
                     <div class="col-lg-6 text-lg-right header-top-right">
@@ -53,7 +49,7 @@
                 </div>
             </div>
         </div>
-        </div>
+        </div> -->
 
     </header>
     <!-- Header section end -->
@@ -63,67 +59,58 @@
         <div class="container hero-text text-black">
             <h2>Flask example for monitering & Actuating!!</h2>
             <p>
-                Simple example for monitering sensor data & actuate LED on web environment <br>
-                This system consists of three elements : 1) webserver 2) Database(MySQL) 3) Raspberry-Pi<br>
+                Simple example for monitering data & actuate on web environment <br>
+                This system consists of three elements : <br>
+                <br>
+                1) webserver <br>
+                2) Database(MySQL) <br>
+                3) Jet-son-nano<br>
+                <br>
                 (Both webserver & database is located on AWS)<br>
-                There are two main Function in this system <br>
-                1 Can get sensor information from raspberry pi<br>
-                2 Actuate LED using Buttons<br>
+                There is a main Function in this system <br>
+                1 Can get sensor information from Jet-son-nano<br>
             </p>
         </div>
     </section>
 
+    <button id="LED" type="button" class="btn btn-primary active text-center"
+                        style="margin-top:1px;width:200px;">외부 신호 왔을 때</button>
+
     <!-- Services section -->
     <section class="services-section spad" style="background-color:aliceblue">
-        <h2 class="text-center" style="padding-bottom:60px"> Temperature Sensor(DHT11) Monitering Value!</h2>
+        <h2 class="text-center" style="padding-bottom:10px"> Gas Monitering Dashboard!</h2>
         <div class="container">
-            <div class="row section-title  text-secondary">
-                <p id="id_date"></p>
-            </div>
             <div class="row">
-                <div class="col-lg-4">
-                    <h4>Current Temperature</h4>
-                    <div class="progress" style="height:60px;">
-                        <div class="progress-bar" id="id_temp_bar" role="progressbar" aria-valuenow="50"
-                            aria-valuemin="50" aria-valuemax="50">
-                            <p class="text-white" id="id_temp_message" style="padding-top:15px;"></p>
-                        </div>
+                <h4>Current Gas Image</h4>
+
+                <div class="progress" style="height:60px;">
+                    <div class="progress-bar" id="id_temp_bar" role="progressbar" aria-valuenow="50"
+                        aria-valuemin="50" aria-valuemax="50">
+                        <p class="text-white" id="id_temp_message" style="padding-top:15px;"></p>
                     </div>
-                    <br><br><br>
-                    <h4>Current Humidity</h4>
-                    <div class="progress" style="height:60px;">
-                        <div class="progress-bar" role="progressbar" id="id_humid_bar" aria-valuenow="50"
-                            aria-valuemin="50" aria-valuemax="50">
-                            <p class="text-white" id="id_humid_message" style="padding-top:15px;"></p>
-                        </div>
-                    </div>
-
-                    <button id="LED" type="button" class="btn btn-primary active text-center"
-                        style="margin-top:30px;width:200px;">LED ON</button>
-
-
-
                 </div>
+
                 <div class="col-lg-6 offset-lg-1 pl-lg-0 text-center">
                     <div class="section-title text-black">
-                        <p>Table for Recent 5 values</p>
+                        <p>Gas Table for Recent 5 values</p>
                     </div>
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Date time</th>
-                                <th>Temperature</th>
-                                <th>Humidity</th>
-                                <th>Name</th>
+                                <th>Datetime</th>
+                                <th>Device_ID</th>
+                                <th>State</th>
+                                <th>Image_Path</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             {% for i in range(1, 6) %}
                             <tr>
-                                <td id="id_table_{{i}}_date"></td>
-                                <td id="id_table_{{i}}_temp"></td>
-                                <td id="id_table_{{i}}_humid"></td>
-                                <td id="id_table_{{i}}_name"></td>
+                                <td id="id_table_sticker_{{i}}_date"></td>
+                                <td id="id_table_sticker_{{i}}_id"></td>
+                                <td id="id_table_sticker_{{i}}_state"></td>
+                                <td id="id_table_sticker_{{i}}_path"></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -136,92 +123,96 @@
 
     <!-- Services section -->
     <section class="services-section spad" style="background-color:aliceblue">
-        <h2 class="text-center" style="padding-bottom:60px"> Get Data from OPEN API!!</h2>
+        <h2 class="text-center" style="padding-bottom:15px"> Sticker Monitering Dashboard!</h2>
         <div class="container">
-            <div class="row section-title  text-secondary">
-                <p id="id_date"></p>
-            </div>
             <div class="row">
+                <h4>Current Sticker Image</h4>
+
+                <div class="progress" style="height:60px;">
+                    <div class="progress-bar" role="progressbar" id="id_humid_bar" aria-valuenow="50"
+                        aria-valuemin="50" aria-valuemax="50">
+                        <p class="text-white" id="id_humid_message" style="padding-top:15px;"></p>
+                    </div>
+                </div>
+                    
+                <div class="col-lg-6 offset-lg-1 pl-lg-0 text-center">
                     <div class="section-title text-black">
-                        <p>Table for 5 street</p>
+                        <p>Sticker Table for Recent 5 values</p>
                     </div>
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Date time</th>
-                                <th>stationName</th>
-                                <th>o3Value</th>
-                                <th>pm25Value24</th>
+                                <th>Datetime</th>
+                                <th>Device_ID</th>
+                                <th>State</th>
+                                <th>Image_Path</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for j in range(1, 6) %}
+                            <tr>
+                                <td id="id_table_gas_{{j}}_date"></td>
+                                <td id="id_table_gas_{{j}}_id"></td>
+                                <td id="id_table_gas_{{j}}_state"></td>
+                                <td id="id_table_gas_{{j}}_path"></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- Services section end -->
+
+    <!-- Services section -->
+    <section class="services-section spad" style="background-color:aliceblue">
+        <h2 class="text-center" style="padding-bottom:10px">Device Table for Recent 5 values</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-1 pl-lg-0 text-center">
+                    <div class="section-title text-black">
+                        <p>Device Table for Recent 5 values</p>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Datetime</th>
+                                <th>Device_ID</th>
+                                <th>State</th>
+                                <th>Image_Path</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
                             {% for i in range(1, 6) %}
                             <tr>
-                                <td id="id_table_aircondition_{{i}}_date"></td>
-                                <td id="id_table_aircondition_{{i}}_station"></td>
-                                <td id="id_table_aircondition_{{i}}_o3value"></td>
-                                <td id="id_table_aircondition_{{i}}_pm25"></td>
+                                <td id="id_table_sticker_{{i}}_date"></td>
+                                <td id="id_table_sticker_{{i}}_id"></td>
+                                <td id="id_table_sticker_{{i}}_state"></td>
+                                <td id="id_table_sticker_{{i}}_path"></td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
+                </div>
             </div>
         </div>
     </section>
     <!-- Services section end -->
 
     <!-- Footer section -->
-    <footer class="footer-section" style="background-color:black">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 footer-widget">
-
-                    <p>내가 다만듬<br>밑에꺼 사실 클릭해도 아무것도연결안됨</p>
-                    <div class="social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 col-md-6 footer-widget">
-                    <div class="contact-widget">
-                        <h5 class="fw-title">CONTACT US</h5>
-                        <p><i class="fa fa-map-marker"></i>04620 중구 필동로 1길 30 동국대학교</p>
-                        <p><i class="fa fa-phone"></i>전화 : 010-5678-3431</p>
-                        <p><i class="fa fa-envelope"></i>jeff8014@gmail.com</p>
-                        <p><i class="fa fa-clock-o"></i>월 - 금, 12AM ~ 12PM</p>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6 footer-widget">
-                    <div class="map-footer">
-
-                        <div class="row" id="map-footer">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-
-                <div class="copyright">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-                        is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
+    <footer class="footer-section" style="background-color:white">
+        <div class="contact-widget">
+            <h5 class="fw-title">CONTACT US</h5>
+            <p><i class="fa fa-map-marker"></i>04620 중구 필동로 1길 30 동국대학교</p>
+            <p><i class="fa fa-phone"></i>전화 : 010-4741-7751</p>
+            <p><i class="fa fa-envelope"></i>jyjun1015@gmail.com</p>
+            <p><i class="fa fa-clock-o"></i>월 - 금, 9AM ~ 11PM</p>
         </div>
-
-
-
     </footer>
     <!-- Footer section end -->
 
@@ -240,6 +231,8 @@
 <script src="{{url_for('static', filename='js/guage.js')}}"></script>
 <script>
     let led_status = 0;
+
+    // 외부신호를 LED 로 받을 때, /led 
     $(function () {
         $("button").click(function () {
             $.get('/led', { input: led_status }, function (data, success) {
@@ -247,48 +240,61 @@
                 if (led_status == 0) {
                     led_status = 1;
                     $("#LED").fadeTo('slow', 1);
-                    $("#LED").text("LED ON");
+                    $("#LED").text("외부 신호 O");
                 }
                 else {
                     led_status = 0;
                     $("#LED").fadeTo('slow', 0.15);
-                    $("#LED").text("LED OFF");
+                    $("#LED").text("외부 신호 X");
                 }
             });
         });
     })
 
     $(document).ready(function () {
-        $.getJSON('/getData', function (data) {
+        $.getJSON('/getSticker', function (data) {
             for (i = 0; i < 5; i++) {
                 const t = toString(i + 1);
-                $('#id_table_'.concat(i + 1, '_date')).text(data[i][3]);
-                $('#id_table_'.concat(i + 1, '_temp')).text(data[i][1] + '˚C');
-                $('#id_table_'.concat(i + 1, '_humid')).text(data[i][2] + '%');
-                $('#id_table_'.concat(i + 1, '_name')).text(data[i][4]);
+                $('#id_table_sticker_'.concat(i + 1, '_date')).text(data[i][0]);
+                $('#id_table_sticker_'.concat(i + 1, '_id')).text(data[i][1] + '번 기계');
+                $('#id_table_sticker_'.concat(i + 1, '_state')).text(data[i][2]);
+                $('#id_table_sticker_'.concat(i + 1, '_path')).text(data[i][4]);
             }
-            $('#id_temp_bar').width(data[0][1] + '%')
-            $('#id_temp_message').text(data[0][1] + '˚C');
-            $('#id_humid_bar').width(data[0][2] + '%')
-            $('#id_humid_message').text(data[0][2] + '%');
-        });
-        $("#LED").fadeTo('slow', 0.15);
-        $("#LED").text("LED OFF");
-        
-        $.getJSON('/getAirCondition', function (data) {
-            console.log(data.list[0].coValue)
-            
-            for (i = 0; i < 5; i++) {
-                
-                const t = toString(i + 1);
-                $('#id_table_aircondition_'.concat(i + 1, '_date')).text(data.list[i].dataTime);
-                $('#id_table_aircondition_'.concat(i + 1, '_station')).text(data.list[i].stationName);
-                $('#id_table_aircondition_'.concat(i + 1, '_o3value')).text(data.list[i].o3Value);
-                $('#id_table_aircondition_'.concat(i + 1, '_pm25')).text(data.list[i].pm25Value24);
-            }
-            
-        });
-    })
-</script>
 
+            // 이미지 넣는 자리 
+            // $('#id_temp_bar').width(data[0][1] + 'gas_image')
+            $('#id_temp_message').text(data[0][1] + 'gas_image');
+            
+            // $('#id_humid_bar').width(data[0][2] + '%')
+            $('#id_humid_message').text(data[0][2] + 'sticker_image');
+        });
+
+        $("#LED").fadeTo('slow', 0.15);
+        $("#LED").text("외부 신호 X2");
+        
+        $.getJSON('/getGas', function (data) {
+            for (i = 0; i < 5; i++) {
+                const t = toString(i + 1);
+                $('#id_table_gas_'.concat(i + 1, '_date')).text(data[i][0]);
+                $('#id_table_gas_'.concat(i + 1, '_id')).text(data[i][1] + '번 기계');
+                $('#id_table_gas_'.concat(i + 1, '_state')).text(data[i][2]);
+                $('#id_table_gas_'.concat(i + 1, '_path')).text(data[i][4]);
+            }
+            
+        });
+
+        $.getJSON('/getDevice', function (data) {
+            for (i = 0; i < 5; i++) {
+                const t = toString(i + 1);
+                $('#id_table_device_'.concat(i + 1, '_date')).text(data[i][0]);
+                $('#id_table_device_'.concat(i + 1, '_id')).text(data[i][1] + '번 기계');
+                $('#id_table_device_'.concat(i + 1, '_state')).text(data[i][2]);
+                $('#id_table_device_'.concat(i + 1, '_path')).text(data[i][4]);
+            }
+            
+        });
+
+    })
+
+</script>
 </html>
