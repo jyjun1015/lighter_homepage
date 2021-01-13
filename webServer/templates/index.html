@@ -23,8 +23,10 @@
         <div class="loader"></div>
     </div>
     <!-- Header section -->
-    <!-- <header class="header-section" style="background-color:white;">
-        <div class="header-top">
+     <header class="header-section" style="background-color:black;">
+        <!-- 라인1 -->
+        <div class="header-top"> 
+            <!-- 라인2 -->
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 header-top-left">
@@ -38,6 +40,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 text-lg-right header-top-right">
+                        <!-- 양 사이드, 이후 flex 도입 -->
                         <div class="top-social">
                             <a href=""><i class="fa fa-facebook"></i></a>
                             <a href=""><i class="fa fa-twitter"></i></a>
@@ -49,13 +52,11 @@
                 </div>
             </div>
         </div>
-        </div> -->
-
+        </div> 
     </header>
     <!-- Header section end -->
 
-    <!-- Hero section -->
-    <section class="hero-section">
+    <!-- <section class="hero-section">
         <div class="container hero-text text-black">
             <h2>Flask example for monitering & Actuating!!</h2>
             <p>
@@ -71,22 +72,34 @@
                 1 Can get sensor information from Jet-son-nano<br>
             </p>
         </div>
-    </section>
+    </section> -->
 
-    <button id="LED" type="button" class="btn btn-primary active text-center"
-                        style="margin-top:1px;width:200px;">외부 신호 왔을 때</button>
-
-    <!-- Services section -->
+    <parent-section>
+    <!-- Gas section -->
     <section class="services-section spad" style="background-color:aliceblue">
+        <!-- 외부 신호 -->
+        <div>
+
+            <a href=""><button>외부 신호</button></a>
+            <button id="SIGNAL" type="button" class="btn btn-primary active text-center" 
+                style="margin-top:1px;width:200px;"></button>
+        </div>
+
         <h2 class="text-center" style="padding-bottom:10px"> Gas Monitering Dashboard!</h2>
-        <div class="container">
+        <div class="container ">
             <div class="row">
-                <h4>Current Gas Image</h4>
+                
+                <!-- <img src="{{ img_data }}" alt="User Image"> -->
+                <!-- <img src="{{ url_for('static', filename='image/img13.jpg') }}"> -->
+                
+                <!-- {% if True %}
+                <img src="{{ url_for('static', filename=image_file) }}">
+                {% endif %}  -->
 
                 <div class="progress" style="height:60px;">
                     <div class="progress-bar" id="id_temp_bar" role="progressbar" aria-valuenow="50"
                         aria-valuemin="50" aria-valuemax="50">
-                        <p class="text-white" id="id_temp_message" style="padding-top:15px;"></p>
+                        <p class="text-white" id="id_temp_message" style="padding-top:15px;">외부 신호</p>
                     </div>
                 </div>
 
@@ -119,19 +132,18 @@
             </div>
         </div>
     </section>
-    <!-- Services section end -->
+    <!-- Gas section end -->
 
-    <!-- Services section -->
+    <!-- Sticker section -->
     <section class="services-section spad" style="background-color:aliceblue">
         <h2 class="text-center" style="padding-bottom:15px"> Sticker Monitering Dashboard!</h2>
         <div class="container">
             <div class="row">
-                <h4>Current Sticker Image</h4>
 
                 <div class="progress" style="height:60px;">
                     <div class="progress-bar" role="progressbar" id="id_humid_bar" aria-valuenow="50"
                         aria-valuemin="50" aria-valuemax="50">
-                        <p class="text-white" id="id_humid_message" style="padding-top:15px;"></p>
+                        <p class="text-white" id="id_humid_message" style="padding-top:15px;">외부 신호</p>
                     </div>
                 </div>
                     
@@ -166,13 +178,20 @@
 
         </div>
     </section>
-    <!-- Services section end -->
+    <!-- Sticker section end -->
 
-    <!-- Services section -->
+    <!-- Device section -->
     <section class="services-section spad" style="background-color:aliceblue">
-        <h2 class="text-center" style="padding-bottom:10px">Device Table for Recent 5 values</h2>
+        <h2 class="text-center" style="padding-bottom:15px"> Device Monitering Dashboard!</h2>
         <div class="container">
             <div class="row">
+                <div class="progress" style="height:60px;">
+                    <div class="progress-bar" role="progressbar" id="id_humid_bar" aria-valuenow="50"
+                        aria-valuemin="50" aria-valuemax="50">
+                        <p class="text-white" id="id_humid_message" style="padding-top:15px;">외부 신호</p>
+                    </div>
+                </div>
+                    
                 <div class="col-lg-6 offset-lg-1 pl-lg-0 text-center">
                     <div class="section-title text-black">
                         <p>Device Table for Recent 5 values</p>
@@ -182,27 +201,31 @@
                             <tr>
                                 <th>Datetime</th>
                                 <th>Device_ID</th>
-                                <th>State</th>
-                                <th>Image_Path</th>
-                            
+                                <th>CPU</th>
+                                <th>GPU</th>
+                                <th>AO</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             {% for i in range(1, 6) %}
                             <tr>
-                                <td id="id_table_sticker_{{i}}_date"></td>
-                                <td id="id_table_sticker_{{i}}_id"></td>
-                                <td id="id_table_sticker_{{i}}_state"></td>
-                                <td id="id_table_sticker_{{i}}_path"></td>
+                                <td id="id_table_device_{{i}}_date"></td>
+                                <td id="id_table_device_{{i}}_id"></td>
+                                <td id="id_table_device_{{i}}_temp1"></td>
+                                <td id="id_table_device_{{i}}_temp2"></td>
+                                <td id="id_table_device_{{i}}_temp3"></td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
+
+
         </div>
     </section>
-    <!-- Services section end -->
+    <!-- Device section end -->
 
     <!-- Footer section -->
     <footer class="footer-section" style="background-color:white">
@@ -215,14 +238,11 @@
         </div>
     </footer>
     <!-- Footer section end -->
-
+    </parent-section>
 
 </body>
-
-
 <!--====== Javascripts & Jquery ======-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/owl.carousel.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/masonry.pkgd.min.js')}}"></script>
@@ -230,55 +250,56 @@
 <script src="{{url_for('static', filename='js/main.js')}}"></script>
 <script src="{{url_for('static', filename='js/guage.js')}}"></script>
 <script>
-    let led_status = 0;
 
-    // 외부신호를 LED 로 받을 때, /led 
+    // 외부신호 버튼
+    let signal = 0;
     $(function () {
         $("button").click(function () {
-            $.get('/led', { input: led_status }, function (data, success) {
 
-                if (led_status == 0) {
-                    led_status = 1;
-                    $("#LED").fadeTo('slow', 1);
-                    $("#LED").text("외부 신호 O");
+            // 새로고침
+
+            $.get('/update', { input: signal }, function (data, success) {
+                if (signal == 0) {
+                    signal = 1;
+                    $("#SIGNAL").fadeTo('slow', 1);
+                    $("#SIGNAL").text("외부 신호 O");
                 }
                 else {
-                    led_status = 0;
-                    $("#LED").fadeTo('slow', 0.15);
-                    $("#LED").text("외부 신호 X");
+                    signal = 0;
+                    $("#SIGNAL").fadeTo('slow', 0.15);
+                    $("#SIGNAL").text("외부 신호 X");
                 }
             });
         });
     })
-
     $(document).ready(function () {
+
+        $("#SIGNAL").fadeTo('slow', 0.3);
+        $("#SIGNAL").text("외부 신호 대기");
+
         $.getJSON('/getSticker', function (data) {
             for (i = 0; i < 5; i++) {
                 const t = toString(i + 1);
                 $('#id_table_sticker_'.concat(i + 1, '_date')).text(data[i][0]);
                 $('#id_table_sticker_'.concat(i + 1, '_id')).text(data[i][1] + '번 기계');
                 $('#id_table_sticker_'.concat(i + 1, '_state')).text(data[i][2]);
-                $('#id_table_sticker_'.concat(i + 1, '_path')).text(data[i][4]);
+                $('#id_table_sticker_'.concat(i + 1, '_path')).text(data[i][3]);
             }
 
             // 이미지 넣는 자리 
             // $('#id_temp_bar').width(data[0][1] + 'gas_image')
-            $('#id_temp_message').text(data[0][1] + 'gas_image');
+            // $('#id_temp_message').text(data[0][1] + 'gas_image');
             
             // $('#id_humid_bar').width(data[0][2] + '%')
-            $('#id_humid_message').text(data[0][2] + 'sticker_image');
+            // $('#id_humid_message').text(data[0][2] + 'sticker_image');
         });
-
-        $("#LED").fadeTo('slow', 0.15);
-        $("#LED").text("외부 신호 X2");
-        
         $.getJSON('/getGas', function (data) {
             for (i = 0; i < 5; i++) {
                 const t = toString(i + 1);
                 $('#id_table_gas_'.concat(i + 1, '_date')).text(data[i][0]);
                 $('#id_table_gas_'.concat(i + 1, '_id')).text(data[i][1] + '번 기계');
                 $('#id_table_gas_'.concat(i + 1, '_state')).text(data[i][2]);
-                $('#id_table_gas_'.concat(i + 1, '_path')).text(data[i][4]);
+                $('#id_table_gas_'.concat(i + 1, '_path')).text(data[i][3]);
             }
             
         });
@@ -286,14 +307,13 @@
         $.getJSON('/getDevice', function (data) {
             for (i = 0; i < 5; i++) {
                 const t = toString(i + 1);
-                $('#id_table_device_'.concat(i + 1, '_date')).text(data[i][0]);
-                $('#id_table_device_'.concat(i + 1, '_id')).text(data[i][1] + '번 기계');
-                $('#id_table_device_'.concat(i + 1, '_state')).text(data[i][2]);
-                $('#id_table_device_'.concat(i + 1, '_path')).text(data[i][4]);
+                $('#id_table_device_'.concat(i + 1, '_date')).text(data[i][1]);
+                $('#id_table_device_'.concat(i + 1, '_id')).text(data[i][2] + '번 기계');
+                $('#id_table_device_'.concat(i + 1, '_temp1')).text(data[i][3]);
+                $('#id_table_device_'.concat(i + 1, '_temp2')).text(data[i][4]);
+                $('#id_table_device_'.concat(i + 1, '_temp3')).text(data[i][5]);
             }
-            
         });
-
     })
 
 </script>

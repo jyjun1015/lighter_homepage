@@ -1,7 +1,7 @@
 /* =================================
 ------------------------------------
   LERAMIZ - Landing Page Template
-  Version: 1.0
+  Version: 1.0a
  ------------------------------------ 
  ====================================*/
 
@@ -322,7 +322,7 @@ ol {
 }
 
 .hero-text {
-	padding-top: 340px;
+	padding-top: 310px;
 	text-align: center;
 }
 
@@ -1979,7 +1979,7 @@ ol {
 		height: auto;
 	}
 	.hero-text {
-		padding-top: 250px;
+		padding-top: 20px;
 		padding-bottom: 150px;
 	}
 	.filter-form input,
